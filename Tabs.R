@@ -142,7 +142,7 @@ Examples <- tabPanel(strong("Examples"), fluid = TRUE, icon = icon("magnifying-g
                            column(10,
                                   h4(textOutput("example_currentTime")),
                                   tags$li(p("Once you click", strong("Start,"), "an event study plot with simultaneous confidence band will be displayed below.")),
-                                  tags$li(p("With the bounds you define for honest inference, you can find the time spans over which the treatment effect is uniformly significant. They are marked in grey. It may take a few seconds to compute the significant time spans. You could fine-tune the control parameter in [Step 6] such that the treatment effect is borderline significant over a certain time span.")),
+                                  tags$li(p("With the bounds you define for honest inference, you can find the time spans over which the treatment effect is uniformly significant. They are marked in grey. It may take a few seconds to compute the significant time spans. You could fine-tune the control parameter in [Step 5] such that the treatment effect is borderline significant over a certain time span.")),
                                   tags$li(p("The inference result around the reference time point (i.e. between two event time closest to the reference time) should be treated with caution.")),
                                   tabPanel("Event Study Plot", 
                                                        fluidRow(
@@ -272,7 +272,7 @@ OwnData <- tabPanel(strong("Analyze Your Own Estimates"), fluid = TRUE, icon = i
                           column(10,
                                  h4(textOutput("owndata_currentTime")),
                                  tags$li(p("Once you click", strong("Start,"), "an event study plot with simultaneous confidence band will be displayed below.")),
-                                 tags$li(p("With the bounds you define for honest inference, you can find the time spans over which the treatment effect is uniformly significant. They are marked in grey. It may take a few seconds to compute the significant time spans. You could fine-tune the control parameter in [Step 7] such that the treatment effect is borderline significant over a certain time span.")),
+                                 tags$li(p("With the bounds you define for honest inference, you can find the time spans over which the treatment effect is uniformly significant. They are marked in grey. It may take a few seconds to compute the significant time spans. You could fine-tune the control parameter in [Step 6] such that the treatment effect is borderline significant over a certain time span.")),
                                  tags$li(p("The inference result around the reference time point (i.e. between two event time closest to the reference time) should be treated with caution.")),
                                  tabPanel("Event Study Plot", 
                                           fluidRow(
@@ -370,7 +370,7 @@ More <- navbarMenu(strong("More"), icon = icon("list"),
                    tabPanel(strong("Resources"), fluid = TRUE,
                             p(h4("Related Researches")),
                             tags$ul(
-                              tags$li(p(a("Fang and Liebl (2025):", href="https://github.com/ccfang2/fdid"), "Honest Causal Inference with Difference-in-Differences: A Functional Data Perspective.", em("Working Paper."))),
+                              tags$li(p(a("Fang and Liebl (2025):", href="https://github.com/ccfang2/fdid"), "Honest Difference-in-Differences Using Event Study Plots: A Functional Data Approach.", em("Working Paper."))),
                               tags$li(p(a("Liebl and Reimherr (2023):", href="https://academic.oup.com/jrsssb/article/85/3/842/7133768"), "Fast and fair simultaneous confidence bands for functional parameters.", em("Journal of the Royal Statistical Society Series B: Statistical Methodology"), "85 (3): 842–868.")),
                               tags$li(p(a("Rambachan and Roth (2023):", href="https://academic.oup.com/restud/article-abstract/90/5/2555/7039335"), "A More Credible Approach to Parallel Trends.", em("The Review of Economic Studies"), "90 (5): 2555–2591."))
                               ),

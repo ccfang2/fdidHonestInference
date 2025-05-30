@@ -52,7 +52,7 @@ UI <- shinyUI({
       refreshColour = "brown"),
 
     # Navbar structure for UI
-    navbarPage(strong("Honest Inference with Event Study Plots"), theme = shinytheme("yeti"),
+    navbarPage(strong("Honest Difference-in-Differences Using Event Study Plots"), theme = shinytheme("yeti"),
                Home,
                Examples,
                OwnData,

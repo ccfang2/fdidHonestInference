@@ -310,9 +310,8 @@ server <- function(input, output, session) {
     fileInput("help_file_data",
               p("Upload original data file in csv format", span(a("[ Example File ]", href="https://raw.githubusercontent.com/ccfang2/fdidHonestInference/main/data/DataFormat.csv")),
                 tags$li(h6("In the first column is the outcome variable.")),
-                tags$li(h6("In the last two columns are time and unit indices.")),
-                tags$li(h6("In between are covariates.")),
-                tags$li(h6("The outcome, covariates and time indice should be numeric.")),
+                tags$li(h6("In the latter two columns are time and unit indices.")),
+                tags$li(h6("The outcome should be numeric.")),
                 tags$li(h6("The column names do not need to be the same as [ Example File ]."))),
               accept = ".csv")
   })
@@ -332,7 +331,8 @@ server <- function(input, output, session) {
               p("Upload a treatment file in csv format", span(a("[ Example File ]", href="https://raw.githubusercontent.com/ccfang2/fdidHonestInference/main/data/TreatmentFormat.csv")),
                 tags$li(h6("In the first column is unit indice.")),
                 tags$li(h6("In the second column is the time, right after which the treatment is given, for each unit.")),
-                tags$li(h6("NA indicates the control units."))
+                tags$li(h6("NA indicates the control units.")),
+                tags$li(h6("All pre-determined covariates are placed afterwards. Covariates should be numeric."))
               ),
               accept = ".csv")
   })
@@ -367,8 +367,10 @@ server <- function(input, output, session) {
     help_data      <- as.data.frame(help_read_data())
     help_treatment <- as.data.frame(help_read_treatment())
     
-    colnames(help_data)[c(1, ncol(help_data)-1, ncol(help_data))] <- c("y", "t", "i")
-    colnames(help_treatment) <- c("i","t0")
+    # colnames(help_data)[c(1, ncol(help_data)-1, ncol(help_data))] <- c("y", "t", "i")
+    # colnames(help_treatment) <- c("i","t0")
+    colnames(help_data) <- c("y", "t", "i")
+    colnames(help_treatment)[1:2] <- c("i","t0")
 
     if (sum(is.na(help_treatment$t0))==0) stop("There must be some control units marked with NA in 't0' at 'treatment' file.")
     if(!is.numeric(help_data$t)) stop("The time index in 'data' file should be numeric.")
