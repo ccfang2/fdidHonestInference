@@ -41,7 +41,7 @@ shiny::runGitHub("fdidHonestInference", "ccfang2")
 2. Analysis results and plots are downloadable by a simple click of buttons. But, please be reminded that only the latest analysis results and plots are accessible, so download them timely if needed.
 
 ### Instructions
-Please watch this Youtube [video](https://www.youtube.com/watch?v=PyY-2ptiLTU) for detailed instruction. This video is also embeded in this Shiny app. Please be aware that the layout of Shiny app shown in this video may be slightly different from the latest version of app.
+Please watch this Youtube [video](https://www.youtube.com/watch?v=tUGmDLJE9qA) for detailed instruction. This video is also embeded in this Shiny app. Please be aware that the layout of Shiny app shown in this video may be slightly different from the latest version of app.
 
 ## Reference
 [^1]: Fang, C. and Liebl, D. (2025). Honest Difference-in-Differences Using Event Study Plots: A Functional Data Approach. Working Paper
