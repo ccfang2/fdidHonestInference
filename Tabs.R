@@ -3,7 +3,7 @@
 Home <- tabPanel(strong("Home"), icon = icon("house"),
                  h4(strong("About this Shiny App")),
                  p("This application is intended to facilitate the honest inference approach discussed in ", a("Fang and Liebl (2025).", href="https://github.com/ccfang2/fdid"), "That paper presents a novel functional perspective on Difference-in-Differences (DiD) that allows for honest inference using event study plots under violations of parallel trends and/or no-anticipation assumptions. Below, you may find a video of short presentation for that paper."),
-                 p("In tab panel ", strong("[ Examples ], "), "you are able to conduct honest inference for an example you select. Once you follow the steps to complete the setup, you will get an event study plot with simultaneous confidence band for that example. Moreover, with the bounds you define for honest inference, you can find the time spans over which the treatment effect is uniformly significant. Most importantly, you could fine-tune the control parameter of bounds such that the treatment effect is borderline significant over a specific time span. The plot can be downloaded with a click."),
+                 p("In tab panel ", strong("[ Examples ], "), "you are able to conduct honest inference for an example you select. Once you follow the steps to complete the setup, you will get an event study plot with simultaneous confidence band for that example. Moreover, with the reference band you define for honest inference, you can find the time spans over which the treatment effect is honestly and uniformly significant. Most importantly, you could fine-tune the control parameter of the reference band such that the treatment effect is borderline significant over a specific time span. The plot can be downloaded with a click."),
                  p("In tab panel ", strong("[ Analyze Your Own Data ], "), "you can upload data files containing the estimates of event-study coefficients and covariance matrix for your own research to perform an honest inference."),
                  p("If you haven't estimated coefficients and/or covariance matrix yet, you need to go to tab panel ", strong("[ Quick Help ],"), "where you can get your estimates done quickly with the method proposed in ", a("Fang and Liebl (2025).", href="https://github.com/ccfang2/fdid"), "It works for both staggered and non-staggered adoption settings. You can directly download the estimates and upload them in tab panel [ Analyze Your Own Data ] for analysis."),
                  hr(),
@@ -12,16 +12,16 @@ Home <- tabPanel(strong("Home"), icon = icon("house"),
                           h4(strong("Video of Paper Presentation")),
                           box(
                             width = 12, 
-                            HTML('<iframe width="595" height="335" src="https://www.youtube.com/embed/HVa42mJYppE?si=ACEU-U306FLXlvf5" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen> </iframe>'),
-                            p("To be updated.")
+                            HTML('<iframe width="595" height="335" src="https://www.youtube.com/embed/h0KCv8y9Apw?si=qCpveOA6mM262SSG" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen> </iframe>'),
+                            p("Updated: 2025-06-04")
                           )
                          ),
                    column(6,
                           h4(strong("Video of this Shiny App")),
                           box(
                             width = 12, 
-                            HTML('<iframe width="595" height="335" src="https://www.youtube.com/embed/HVa42mJYppE?si=ACEU-U306FLXlvf5" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen> </iframe>'),
-                            p("To be updated")
+                            HTML('<iframe width="595" height="335" src="https://www.youtube.com/embed/tUGmDLJE9qA?si=A61pUgicWnWBUcXm" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen> </iframe>'),
+                            p("Updated: 2025-06-05")
                             #p("Note: The layout of Shiny app shown in this video may be slightly different from its latest version.")
                             )
                           )  
@@ -58,8 +58,9 @@ Examples <- tabPanel(strong("Examples"), fluid = TRUE, icon = icon("magnifying-g
                                                     "Bosch and Campos-Vazquez (2014)"=2,
                                                     "Lafortune et al. (2018)"=3,
                                                     "Gallagher (2014)"=4,
-                                                    "Simulated Example of Staggered Adoption"=5,
-                                                    "Simulated Example of Non-staggered Adoption"=6
+                                                    "Chen et al. (2025)"=5,
+                                                    "Simulated Example of Staggered Adoption"=6,
+                                                    "Simulated Example of Non-staggered Adoption"=7
                                                     ),
                                      selected = 1),
                          
@@ -77,7 +78,7 @@ Examples <- tabPanel(strong("Examples"), fluid = TRUE, icon = icon("magnifying-g
                          sliderInput("example_conf.level", "Select a confidence level", min = 0, max = 1, value = 0.95),
                          
                          hr(),
-                         tags$h4(style = "text-align: center; background-color: #E0E0E0; padding: 5px; border-radius: 5px; ","Bounds for Honest Inference"),
+                         tags$h4(style = "text-align: center; background-color: #E0E0E0; padding: 5px; border-radius: 5px; ","Honest Reference Band"),
                          hr(),
                          
                          # Step 4: the time point right after which there is an anticipation of treatment
@@ -112,7 +113,7 @@ Examples <- tabPanel(strong("Examples"), fluid = TRUE, icon = icon("magnifying-g
                          
                          #Step 6: indicate if only the bounds for post-treatment periods are plotted and used for honest inference
                          p(strong(span("[ Step 6 ] : ", style="color:black"))),
-                         radioButtons("example_post.trt", label="Indicate if only the bounds for post-treatment periods are plotted and used for honest inference",
+                         radioButtons("example_post.trt", label="Indicate if only the reference band for post-treatment periods are plotted and used for honest inference",
                                       choices = list("Yes"=1,
                                                      "No"=2),
                                       selected = 2),
@@ -142,7 +143,7 @@ Examples <- tabPanel(strong("Examples"), fluid = TRUE, icon = icon("magnifying-g
                            column(10,
                                   h4(textOutput("example_currentTime")),
                                   tags$li(p("Once you click", strong("Start,"), "an event study plot with simultaneous confidence band will be displayed below.")),
-                                  tags$li(p("With the bounds you define for honest inference, you can find the time spans over which the treatment effect is uniformly significant. They are marked in grey. It may take a few seconds to compute the significant time spans. You could fine-tune the control parameter in [Step 5] such that the treatment effect is borderline significant over a certain time span.")),
+                                  tags$li(p("With the reference band you define for honest inference, you can find the time spans over which the treatment effect is uniformly significant. They are marked in grey. It may take a few seconds to compute the significant time spans. You could fine-tune the control parameter in [Step 5] such that the treatment effect is borderline significant over a certain time span.")),
                                   tags$li(p("The inference result around the reference time point (i.e. between two event time closest to the reference time) should be treated with caution.")),
                                   tabPanel("Event Study Plot", 
                                                        fluidRow(
@@ -206,7 +207,7 @@ OwnData <- tabPanel(strong("Analyze Your Own Estimates"), fluid = TRUE, icon = i
                         sliderInput("owndata_conf.level", "Select a confidence level", min = 0, max = 1, value = 0.95),
                         
                         hr(),
-                        tags$h4(style = "text-align: center; background-color: #E0E0E0; padding: 5px; border-radius: 5px; ","Bounds for Honest Inference"),
+                        tags$h4(style = "text-align: center; background-color: #E0E0E0; padding: 5px; border-radius: 5px; ","Honest Reference Band"),
                         hr(),
                         
                         # Step 5: the time point right after which there is an anticipation of treatment
@@ -241,7 +242,7 @@ OwnData <- tabPanel(strong("Analyze Your Own Estimates"), fluid = TRUE, icon = i
                         
                         #Step 7: indicate if only the bounds for post-treatment periods are plotted and used for honest inference
                         p(strong(span("[ Step 7 ] : ", style="color:black"))),
-                        radioButtons("owndata_post.trt", label="Indicate if only the bounds for post-treatment periods are plotted and used for honest inference",
+                        radioButtons("owndata_post.trt", label="Indicate if only the reference band for post-treatment periods are plotted and used for honest inference",
                                      choices = list("Yes"=1,
                                                     "No"=2),
                                      selected = 2),
@@ -272,7 +273,7 @@ OwnData <- tabPanel(strong("Analyze Your Own Estimates"), fluid = TRUE, icon = i
                           column(10,
                                  h4(textOutput("owndata_currentTime")),
                                  tags$li(p("Once you click", strong("Start,"), "an event study plot with simultaneous confidence band will be displayed below.")),
-                                 tags$li(p("With the bounds you define for honest inference, you can find the time spans over which the treatment effect is uniformly significant. They are marked in grey. It may take a few seconds to compute the significant time spans. You could fine-tune the control parameter in [Step 6] such that the treatment effect is borderline significant over a certain time span.")),
+                                 tags$li(p("With the reference band you define for honest inference, you can find the time spans over which the treatment effect is uniformly significant. They are marked in grey. It may take a few seconds to compute the significant time spans. You could fine-tune the control parameter in [Step 6] such that the treatment effect is borderline significant over a certain time span.")),
                                  tags$li(p("The inference result around the reference time point (i.e. between two event time closest to the reference time) should be treated with caution.")),
                                  tabPanel("Event Study Plot", 
                                           fluidRow(
@@ -385,7 +386,8 @@ More <- navbarMenu(strong("More"), icon = icon("list"),
                               tags$li(p(a("Lovenheim and Willen (2019):", href="https://www.aeaweb.org/articles?id=10.1257/pol.20170570"), "The Long-Run Effects of Teacher Collective Bargaining.", em("American Economic Journal: Economic Policy"), "11 (3): 292–324.")),
                               tags$li(p(a("Bosch and Campos-Vazquez (2014):", href="https://www.aeaweb.org/articles?id=10.1257/pol.6.4.71"), "The Trade-Offs of Welfare Policies in Labor Markets with Informal Jobs: The Case of the ‘Seguro Popular’ Program in Mexico.", em("American Economic Journal: Economic Policy"), "6 (4): 71–99.")),
                               tags$li(p(a("Lafortune et al. (2018):", href="https://www.aeaweb.org/articles?id=10.1257/app.20160567"), "School Finance Reform and the Distribution of Student Achievement.", em("American Economic Journal: Applied Economics"), "10 (2): 12–6.")),
-                              tags$li(p(a("Gallagher (2014):", href="https://www.aeaweb.org/articles?id=10.1257/app.6.3.206"), "Learning about an Infrequent Event: Evidence from Flood Insurance Take-Up in the United States.", em("American Economic Journal: Applied Economics"), "6 (3): 206–33."))
+                              tags$li(p(a("Gallagher (2014):", href="https://www.aeaweb.org/articles?id=10.1257/app.6.3.206"), "Learning about an Infrequent Event: Evidence from Flood Insurance Take-Up in the United States.", em("American Economic Journal: Applied Economics"), "6 (3): 206–33.")),
+                              tags$li(p(a("Chen et al. (2025):", href="https://academic.oup.com/restud/advance-article/doi/10.1093/restud/rdaf066/8220859"), "Women in the Courtroom: Technology and Justice.", em("The Review of Economic Studies"), "1–28."))
                               ),
                             p(h4("Simulated Datasets Listed in Examples")),
                             tags$ul(

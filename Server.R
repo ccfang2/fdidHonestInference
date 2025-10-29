@@ -14,8 +14,9 @@ server <- function(input, output, session) {
     if(input$example == "2") example <- fdid::BCVdata
     if(input$example == "3") example <- fdid::Ldata
     if(input$example == "4") example <- fdid::Gdata
-    if(input$example == "5") {fdid_est <- fdid::fdid(data=fdid::simulated_stagger_data, treatment=fdid::simulated_stagger_treatment); example <- list(beta=fdid_est$beta$coef, cov=fdid_est$beta$cov, t0=fdid_est$t0)}
-    if(input$example == "6") {fdid_est <- fdid::fdid(data=fdid::simulated_nonstagger_data, treatment=fdid::simulated_nonstagger_treatment); example <- list(beta=fdid_est$beta$coef, cov=fdid_est$beta$cov, t0=fdid_est$t0)}
+    if(input$example == "5") example <- fdid::CCYdata
+    if(input$example == "6") {fdid_est <- fdid::fdid(data=fdid::simulated_stagger_data, treatment=fdid::simulated_stagger_treatment); example <- list(beta=fdid_est$beta$coef, cov=fdid_est$beta$cov, t0=fdid_est$t0)}
+    if(input$example == "7") {fdid_est <- fdid::fdid(data=fdid::simulated_nonstagger_data, treatment=fdid::simulated_nonstagger_treatment); example <- list(beta=fdid_est$beta$coef, cov=fdid_est$beta$cov, t0=fdid_est$t0)}
 
     example
   })
