@@ -1,4 +1,4 @@
-# Honest Difference-in-Differences Using Event Study Plots
+# Making Event Study Plots Honest: A Functional Data Approach to Causal Inference
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com)
 ![GitHub last commit](https://img.shields.io/github/last-commit/ccfang2/fdidHonestInference?logo=GitHub)
@@ -6,7 +6,7 @@
 ![GitHub Repo stars](https://img.shields.io/github/stars/ccfang2/fdidHonestInference?style=social)
 ![Twitter Follow](https://img.shields.io/twitter/follow/ccfang819?logo=Twitter&style=social)
 
-> This is a shiny app that facilitates the honest inference approach proposed in Fang and Liebl (2025)[^1] and is built on the R package: [fdid](https://github.com/ccfang2/fdid). Latest Update: 2025-05-30
+> This is a shiny app that facilitates the honest inference approach proposed in Fang and Liebl (2025)[^1] and is built on the R package: [fdid](https://github.com/ccfang2/fdid). Latest Update: 2025-10-29
 
 ## About Honest DiD Inference
 
@@ -44,7 +44,7 @@ shiny::runGitHub("fdidHonestInference", "ccfang2")
 Please watch this Youtube [video](https://www.youtube.com/watch?v=tUGmDLJE9qA) for detailed instruction. This video is also embeded in this Shiny app. Please be aware that the layout of Shiny app shown in this video may be slightly different from the latest version of app.
 
 ## Reference
-[^1]: Fang, C. and Liebl, D. (2025). Honest Difference-in-Differences Using Event Study Plots: A Functional Data Approach. Working Paper
+[^1]: Fang, C. and Liebl, D. (2025). Making Event Study Plots Honest: A Functional Data Approach to Causal Inference. Working Paper
 
 ## Contact
 I hope you enjoy using this app. Any comments or questions are welcome at [ccfang[at]uni-bonn.de](mailto:ccfang@uni-bonn.de).
