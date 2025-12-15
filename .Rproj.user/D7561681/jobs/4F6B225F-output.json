@@ -1,0 +1,7 @@
+[1,"Installing 'shinytoastr' ...\n"]
+[2,"trying URL 'https://cran.rstudio.com/bin/macosx/big-sur-x86_64/contrib/4.3/shinytoastr_2.2.0.tgz'\n"]
+[2,"Content type 'application/x-gzip' length 81808 bytes (79 KB)\n========"]
+[2,"==========================================\ndownloaded 79 KB\n\n"]
+[1,"The downloaded binary packages are in\n"]
+[1,"\t/var/folders/z1/kcgjcb3x6571_367rdljcvc00000gn/T//RtmppbkdD0/downloaded_packages\n"]
+[2,"\n\n✔ Package 'shinytoastr' successfully installed.\n"]
