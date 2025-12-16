@@ -23,14 +23,18 @@ server <- function(input, output, session) {
   
   # Observe Change of Example
   observeEvent(input$example, {
-    example <- selected_example()
+    example                  <- selected_example()
+    example$beta[,"event_t"] <- example$beta[,"event_t"]- example$t0 # Recenter the event time on 0
+    example$t0               <- 0
     updateNumericInput(session,"example_ta.ts", value= example$t0)
   })
 
   # Observe Start
   observeEvent(input$example_start,execute_safely({
-    example          <- selected_example()
-    example_ta.ts    <- if(is.na(input$example_ta.ts)) NULL else input$example_ta.ts
+    example                  <- selected_example()
+    example$beta[,"event_t"] <- example$beta[,"event_t"]- example$t0 # Recenter the event time on 0
+    example$t0               <- 0
+    example_ta.ts            <- if(is.na(input$example_ta.ts)) NULL else input$example_ta.ts
     
     if (!is.null(example_ta.ts) && !(example_ta.ts %in% example$beta[,2][which(example$beta[,2]<=example$t0)])) stop("The time point defined in [Step 5] should be among the pre-treatment event time.")
     if (input$example_control_par1<0) stop("The control parameter M_u should be non-negative.")
@@ -58,7 +62,7 @@ server <- function(input, output, session) {
          ta.s         = if(example_v$result$ta.ts==example_v$result$fdid_scb_est$data$t0) NULL else c(example_v$result$ta.s1, example_v$result$ta.s2),
          frmtr.m      = if(example_v$result$diff_trend=="1") c(example_v$result$control_par1, example_v$result$control_par2) else NULL,
          pos.legend   = if(example_v$result$pos.legend != "none") example_v$result$pos.legend else NULL,
-         scale.legend = 1.4)
+         scale.legend = 1)
     )
     })
 
@@ -68,13 +72,13 @@ server <- function(input, output, session) {
     updateSelectInput(session, "example", selected = 1)
     updateNumericInput(session, "example_df", value = "")
     updateSliderInput(session, "example_sig.level", value = 0.05)
-    updateNumericInput(session, "example_ta.ts", value = -2)
+    updateNumericInput(session, "example_ta.ts", value = 0)#-2
     updateNumericInput(session, "example_ta.s1", value = "")
     updateNumericInput(session, "example_ta.s2", value = "")
     updateRadioButtons(session, "example_diff_trend", selected = 4)
     updateNumericInput(session, "example_control_par1", value = 1)
     updateNumericInput(session, "example_control_par2", value = 1)
-    updateRadioButtons(session, "example_ref.band.pre", selected = 2)
+    updateRadioButtons(session, "example_ref.band.pre", selected = 1)
     updateRadioButtons(session, "example_ci", selected = 1)
     updateRadioButtons(session, "example_pos.legend", selected = "top")
     updateNumericInput(session, "example_width", value = 6)
@@ -120,7 +124,7 @@ server <- function(input, output, session) {
            ta.s         = if(example_v$result$ta.ts==example_v$result$fdid_scb_est$data$t0) NULL else c(example_v$result$ta.s1, example_v$result$ta.s2),
            frmtr.m      = if(example_v$result$diff_trend=="1") c(example_v$result$control_par1, example_v$result$control_par2) else NULL,
            pos.legend   = if(example_v$result$pos.legend != "none") example_v$result$pos.legend else NULL,
-           scale.legend = 1.4,
+           scale.legend = 1,
            verbose      = FALSE)
 
       dev.off()}
@@ -195,8 +199,10 @@ server <- function(input, output, session) {
   
   # Observe Change of Beta File
   observeEvent(input$owndata_file_coef, {
-    owndata_beta <- as.matrix(owndata_read_coef())
-    owndata_t0 <- owndata_beta[,2][which(owndata_beta[,1]==0)]
+    owndata_beta             <- as.matrix(owndata_read_coef())
+    owndata_t0               <- owndata_beta[,2][which(owndata_beta[,1]==0)]
+    owndata_beta[,"event_t"] <- owndata_beta[,"event_t"]- owndata_t0 # Recenter the event time on 0
+    owndata_t0               <- 0
     updateNumericInput(session,"owndata_ta.ts", value=owndata_t0)
   })
   
@@ -204,8 +210,12 @@ server <- function(input, output, session) {
   observeEvent(input$owndata_start,execute_safely({
     
     # Reformat data
-    owndata_beta <- as.matrix(owndata_read_coef())
-    owndata_cov  <- as.matrix(owndata_read_cov())
+    owndata_beta             <- as.matrix(owndata_read_coef())
+    owndata_cov              <- as.matrix(owndata_read_cov())
+    owndata_t0               <- owndata_beta[,2][which(owndata_beta[,1]==0)]
+    owndata_beta[,"event_t"] <- owndata_beta[,"event_t"]- owndata_t0 # Recenter the event time on 0
+    owndata_t0               <- 0
+    owndata_ta.ts            <- if(is.na(input$owndata_ta.ts)) NULL else input$owndata_ta.ts
     
     # Check the reference time
     if (sum(owndata_beta[,1]==0) != 1) stop("The estimate of event study coefficient at reference time point should be normalized to 0.")
@@ -216,9 +226,6 @@ server <- function(input, output, session) {
     # Check if data file is missing
     #if (length(input$owndata_file_coef)==0) stop("Please upload estimates of event study coefficients.")
     #if (length(input$owndata_file_cov)==0) stop("Please upload estimates of covariance matrix.")
-
-    owndata_t0 <- owndata_beta[,2][which(owndata_beta[,1]==0)]
-    owndata_ta.ts    <- if(is.na(input$owndata_ta.ts)) NULL else input$owndata_ta.ts
 
     # Check other inputs
     if (!is.null(owndata_ta.ts) && !(owndata_ta.ts %in% owndata_beta[,2][which(owndata_beta[,2]<=owndata_t0)])) stop("The input in [Step 6] should be among the pre-treatment event time.")
@@ -248,7 +255,7 @@ server <- function(input, output, session) {
          ta.s         = if(owndata_v$result$ta.ts==owndata_v$result$fdid_scb_est$data$t0) NULL else c(owndata_v$result$ta.s1, owndata_v$result$ta.s2),
          frmtr.m      = if(owndata_v$result$diff_trend=="1") c(owndata_v$result$control_par1, owndata_v$result$control_par2) else NULL,
          pos.legend   = if(owndata_v$result$pos.legend != "none") owndata_v$result$pos.legend else NULL,
-         scale.legend = 1.4)
+         scale.legend = 1)
     )
     })
   
@@ -264,7 +271,7 @@ server <- function(input, output, session) {
     updateNumericInput(session, "owndata_ta.s2", value = "")
     updateRadioButtons(session, "owndata_diff_trend", selected = 4)
     updateNumericInput(session, "owndata_control_par", value = 1)
-    updateRadioButtons(session, "owndata_ref.band.pre", selected = 2)
+    updateRadioButtons(session, "owndata_ref.band.pre", selected = 1)
     updateRadioButtons(session, "owndata_ci", selected = 1)
     updateRadioButtons(session, "owndata_pos.legend", selected = "top")
     updateNumericInput(session, "owndata_width", value = 6)
@@ -310,7 +317,7 @@ server <- function(input, output, session) {
            ta.s         = if(owndata_v$result$ta.ts==owndata_v$result$fdid_scb_est$data$t0) NULL else c(owndata_v$result$ta.s1, owndata_v$result$ta.s2),
            frmtr.m      = if(owndata_v$result$diff_trend=="1") c(owndata_v$result$control_par1, owndata_v$result$control_par2) else NULL,
            pos.legend   = if(owndata_v$result$pos.legend != "none") owndata_v$result$pos.legend else NULL,
-           scale.legend = 1.4,
+           scale.legend = 1,
            verbose      = FALSE)
       
       dev.off()}

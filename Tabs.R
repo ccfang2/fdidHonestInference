@@ -3,7 +3,7 @@
 Home <- tabPanel(strong("Home"), icon = icon("house"),
                  h4(strong("About this Shiny App")),
                  p("This application is intended to facilitate the honest causal inference approach discussed in ", a("Fang and Liebl (2025).", href="https://arxiv.org/abs/2512.06804"), "That paper presents a novel functional perspective on Difference-in-Differences (DiD) that allows for honest inference using event study plots under violations of parallel trends and/or no-anticipation assumptions. 
-                   Specifically, in our proposed plot, we compute an infimum-based simultaneous confidence band in the pre-treatment period by parametric bootstrap, and a supremum-based simultaneous confidence band in the post-treatment period by the algorithm of Kac-Rice formula proposed in ", a("Liebl and Reimherr (2023).", href="https://academic.oup.com/jrsssb/article/85/3/842/7133768"),  "Additionally, by contrast to classical reference line in traditional event study plots, we derive an honest reference band based on the violation of parallel trends or no-anticipation assumption for making inference."),
+                   Specifically, in our proposed plot, we compute an infimum-based simultaneous confidence band in the pre-treatment period by parametric bootstrap, and a supremum-based simultaneous confidence band in the post-treatment period by the algorithm of Kac-Rice formula proposed in ", a("Liebl and Reimherr (2023).", href="https://academic.oup.com/jrsssb/article/85/3/842/7133768"),  "Additionally, by contrast to classical reference line in traditional event study plots, we derive an honest reference band, accounting for potential biases from the violation of parallel trends or no-anticipation assumption, when making inference."),
                  p("By doing so, we turn traditional event study plots into rigorous honest causal inference tools through equivalence and relevance testing: Honest reference band can be validated using equivalence testing in the pre-anticipation period, and honest causal effects can be tested using relevance testing in the post-treatment period. Below, you may find a video of short presentation for an early version of that paper."),
                  p("In tab panel ", strong("[ Examples ], "), "you are able to conduct honest inference for an example you select. Once you follow the steps to complete the setup, you will get an event study plot with simultaneous confidence bands for that example. Moreover, with the reference band you define for honest inference, you can find the time spans over which the treatment effect is honestly and uniformly significant. Most importantly, you could fine-tune the control parameters of the reference band such that it is validated in the pre-anticipation period. The plot can be downloaded with a click."),
                  p("In tab panel ", strong("[ Analyze Your Own Data ], "), "you can upload data files containing the estimates of event-study coefficients and covariance matrix for your own research to perform an honest causal inference."),
@@ -125,7 +125,7 @@ Examples <- tabPanel(strong("Examples"), fluid = TRUE, icon = icon("magnifying-g
                          radioButtons("example_ref.band.pre", label="Indicate if the reference band in the pre-anticipation period is plotted",
                                       choices = list("Yes"=1,
                                                      "No"=2),
-                                      selected = 2),
+                                      selected = 1),
                          
                          #Step 7: indicate if point-wise confidence intervals in the post-treatment period are added
                          p(strong(span("[ Step 7 ] : ", style="color:black"))),
@@ -152,7 +152,8 @@ Examples <- tabPanel(strong("Examples"), fluid = TRUE, icon = icon("magnifying-g
                            column(10,
                                   h4(textOutput("example_currentTime")),
                                   tags$li(p("Once you click", strong("Start,"), "an event study plot with the infimum-based simultaneous confidence band in the pre-treatment period and the supremum-based simultaneous confidence band in the post-treatment period will be displayed below.")),
-                                  tags$li(p("With the honest reference band you define for honest causal inference, you can find the time spans over which the treatment effect is uniformly significant. You could fine-tune the control parameters in [Step 5] such that the reference band can be validated in the pre-anticipation period or the treatment effect in the post-treatment period is borderline significant over a certain time span.")),
+                                  tags$li(p("The infimum-based (1-2*alpha)*100% simultaneous confidence band is for performing equivalence testing at significance level alpha (see Section 3.3 in ", a("Fang and Liebl (2025),", href="https://arxiv.org/abs/2512.06804"), " i.e. validating the honest reference band in the pre-anticipation period; and the supremum-based (1-alpha)*100% simultaneous confidence band is for performing relevance testing at significance level alpha (see Section 3.1 in ", a("Fang and Liebl (2025),", href="https://arxiv.org/abs/2512.06804"), " i.e. uniformly and honestly testing causal inference in the post-treatment period.")),
+                                  #tags$li(p("With the honest reference band you define for honest causal inference, you can find the time spans over which the treatment effect is uniformly significant. You could fine-tune the control parameters in [Step 5] such that the reference band can be validated in the pre-anticipation period or the treatment effect in the post-treatment period is borderline significant over a certain time span.")),
                                   tags$li(p("The inference result around the reference time point (i.e. between two event times closest to the reference time) should be treated with caution.")),
                                   tabPanel("Event Study Plot", 
                                                        fluidRow(
@@ -262,7 +263,7 @@ OwnData <- tabPanel(strong("Analyze Your Own Estimates"), fluid = TRUE, icon = i
                         radioButtons("owndata_ref.band.pre", label="Indicate if the reference band in the pre-treatment period is plotted",
                                      choices = list("Yes"=1,
                                                     "No"=2),
-                                     selected = 2),
+                                     selected = 1),
                         
                         # Step 8: indicate if point-wise confidence intervals in the post-treatment period are added
                         p(strong(span("[ Step 8 ] : ", style="color:black"))),
@@ -290,7 +291,8 @@ OwnData <- tabPanel(strong("Analyze Your Own Estimates"), fluid = TRUE, icon = i
                           column(10,
                                  h4(textOutput("owndata_currentTime")),
                                  tags$li(p("Once you click", strong("Start,"), "an event study plot with the infimum-based simultaneous confidence band in the pre-treatment period and the supremum-based simultaneous confidence band in the post-treatment period will be displayed below.")),
-                                 tags$li(p("With the honest reference band you define for honest causal inference, you can find the time spans over which the treatment effect is uniformly significant. You could fine-tune the control parameters in [Step 6] such that the reference band can be validated in the pre-anticipation period or the treatment effect in the post-treatment period is borderline significant over a certain time span.")),
+                                 tags$li(p("The infimum-based (1-2*alpha)*100% simultaneous confidence band is for performing equivalence testing at significance level alpha (see Section 3.3 in ", a("Fang and Liebl (2025),", href="https://arxiv.org/abs/2512.06804"), " i.e. validating the honest reference band in the pre-anticipation period; and the supremum-based (1-alpha)*100% simultaneous confidence band is for performing relevance testing at significance level alpha (see Section 3.1 in ", a("Fang and Liebl (2025),", href="https://arxiv.org/abs/2512.06804"), " i.e. uniformly and honestly testing causal inference in the post-treatment period.")),
+                                 #tags$li(p("With the honest reference band you define for honest causal inference, you can find the time spans over which the treatment effect is uniformly significant. You could fine-tune the control parameters in [Step 6] such that the reference band can be validated in the pre-anticipation period or the treatment effect in the post-treatment period is borderline significant over a certain time span.")),
                                  tags$li(p("The inference result around the reference time point (i.e. between two event times closest to the reference time) should be treated with caution.")),
                                  tabPanel("Event Study Plot", 
                                           fluidRow(
