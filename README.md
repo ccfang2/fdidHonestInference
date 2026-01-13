@@ -6,7 +6,7 @@
 ![GitHub Repo stars](https://img.shields.io/github/stars/ccfang2/fdidHonestInference?style=social)
 ![Twitter Follow](https://img.shields.io/twitter/follow/ccfang819?logo=Twitter&style=social)
 
-This is a shiny app that facilitates the honest causal inference approach proposed in Fang and Liebl (2026)[^1] and is built on the R package: [fdid](https://github.com/ccfang2/fdid). Latest Update: 2025-01-13
+This is a shiny app that facilitates the honest causal inference approach proposed in Fang and Liebl (2026)[^1] and is built on the R package: [fdid](https://github.com/ccfang2/fdid). Latest Update: 2026-01-13
 
 ## About Honest DiD Inference
 
