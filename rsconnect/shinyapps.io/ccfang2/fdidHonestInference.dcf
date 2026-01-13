@@ -5,7 +5,7 @@ account: ccfang2
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 14399044
-bundleId: 11333376
+bundleId: 11439134
 url: https://ccfang2.shinyapps.io/fdidHonestInference/
 version: 1
 asMultiple: FALSE

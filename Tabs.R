@@ -2,12 +2,12 @@
 # Home Panel
 Home <- tabPanel(strong("Home"), icon = icon("house"),
                  h4(strong("About this Shiny App")),
-                 p("This application is intended to facilitate the honest causal inference approach discussed in ", a("Fang and Liebl (2025).", href="https://arxiv.org/abs/2512.06804"), "That paper presents a novel functional perspective on Difference-in-Differences (DiD) that allows for honest inference using event study plots under violations of parallel trends and/or no-anticipation assumptions. 
+                 p("This application is intended to facilitate the honest causal inference approach discussed in ", a("Fang and Liebl (2026).", href="https://arxiv.org/abs/2512.06804"), "That paper presents a novel functional perspective on Difference-in-Differences (DiD) that allows for honest inference using event study plots under violations of parallel trends and/or no-anticipation assumptions. 
                    Specifically, in our proposed plot, we compute an infimum-based simultaneous confidence band in the pre-treatment period by parametric bootstrap, and a supremum-based simultaneous confidence band in the post-treatment period by the algorithm of Kac-Rice formula proposed in ", a("Liebl and Reimherr (2023).", href="https://academic.oup.com/jrsssb/article/85/3/842/7133768"),  "Additionally, by contrast to classical reference line in traditional event study plots, we derive an honest reference band, accounting for potential biases from the violation of parallel trends or no-anticipation assumption, when making inference."),
                  p("By doing so, we turn traditional event study plots into rigorous honest causal inference tools through equivalence and relevance testing: Honest reference band can be validated using equivalence testing in the pre-anticipation period, and honest causal effects can be tested using relevance testing in the post-treatment period. Below, you may find a video of short presentation for an early version of that paper."),
                  p("In tab panel ", strong("[ Examples ], "), "you are able to conduct honest inference for an example you select. Once you follow the steps to complete the setup, you will get an event study plot with simultaneous confidence bands for that example. Moreover, with the reference band you define for honest inference, you can find the time spans over which the treatment effect is honestly and uniformly significant. Most importantly, you could fine-tune the control parameters of the reference band such that it is validated in the pre-anticipation period. The plot can be downloaded with a click."),
                  p("In tab panel ", strong("[ Analyze Your Own Data ], "), "you can upload data files containing the estimates of event-study coefficients and covariance matrix for your own research to perform an honest causal inference."),
-                 p("If you haven't estimated coefficients and/or covariance matrix yet, you need to go to tab panel ", strong("[ Quick Help ],"), "where you can get your estimates done quickly with the method proposed in ", a("Fang and Liebl (2025).", href="https://arxiv.org/abs/2512.06804"), "It works for both staggered and non-staggered adoption settings. You can directly download the estimates and upload them in tab panel [ Analyze Your Own Data ] for analysis."),
+                 p("If you haven't estimated coefficients and/or covariance matrix yet, you need to go to tab panel ", strong("[ Quick Help ],"), "where you can get your estimates done quickly with the method proposed in ", a("Fang and Liebl (2026).", href="https://arxiv.org/abs/2512.06804"), "It works for both staggered and non-staggered adoption settings. You can directly download the estimates and upload them in tab panel [ Analyze Your Own Data ] for analysis."),
                  hr(),
                  fluidRow(
                    column(6, 
@@ -29,7 +29,7 @@ Home <- tabPanel(strong("Home"), icon = icon("house"),
                           )  
                    ),
                  hr(),
-                 p("I hope you find this app useful and/or interesting. Any comments are welcome at", a("ccfang[at]uni-bonn.de",href="mailto:ccfang@uni-bonn.de"),", and you are encouraged to report any issues", a("here.", href="https://github.com/ccfang2/fdid/issues"), "[ Latest Update: 2025-12-15 ]"),
+                 p("I hope you find this app useful and/or interesting. Any comments are welcome at", a("ccfang[at]uni-bonn.de",href="mailto:ccfang@uni-bonn.de"),", and you are encouraged to report any issues", a("here.", href="https://github.com/ccfang2/fdid/issues"), "[ Latest Update: 2026-01-13 ]"),
                  p("Built with",
                     img(src = "shiny.png", height = "30px"),
                     "by",
@@ -96,7 +96,7 @@ Examples <- tabPanel(strong("Examples"), fluid = TRUE, icon = icon("magnifying-g
                                                                tags$li(h6("If it is defined to be the first event time, there must be no violations of parallel trends assumption, because no data is available for computing pre-trend differences"))), 
                                       value = -2),
                          numericInput("example_ta.s1", label=p("Enter the two control parameters S_u and S_l for treatment anticipation (min=0, max=20, step=0.01)",
-                                                              tags$li(h6("See equation (36) in ", a("Fang and Liebl (2025)", href="https://arxiv.org/abs/2512.06804"), "for details")),
+                                                              tags$li(h6("See equation (36) in ", a("Fang and Liebl (2026)", href="https://arxiv.org/abs/2512.06804"), "for details")),
                                                               tags$li(h6("Leaving it blank means that the point-wise confidence interval at time point specified above is used to define the bounds for anticipation")),
                                                               tags$li(h6("If no anticipation is defined above, the values will be simply ignored"))),
                                       value = "", min=0, max=20, step=0.01),
@@ -111,7 +111,7 @@ Examples <- tabPanel(strong("Examples"), fluid = TRUE, icon = icon("magnifying-g
                          conditionalPanel(
                            condition = "input.example_diff_trend != '2'",
                            p("Enter the control prameters M_u and M_l for parallel trends violation (min=0, max=20, step=0.01)",
-                             tags$li(h6("See equation (37) in ", a("Fang and Liebl (2025)", href="https://arxiv.org/abs/2512.06804"), "for details"))),
+                             tags$li(h6("See equation (37) in ", a("Fang and Liebl (2026)", href="https://arxiv.org/abs/2512.06804"), "for details"))),
                            numericInput("example_control_par1", "", value = 0.5, min = 0, max=20, step=0.01),
                            numericInput("example_control_par2", "", value = 0.5, min = 0, max=20, step=0.01)
                          ),
@@ -152,7 +152,7 @@ Examples <- tabPanel(strong("Examples"), fluid = TRUE, icon = icon("magnifying-g
                            column(10,
                                   h4(textOutput("example_currentTime")),
                                   tags$li(p("Once you click", strong("Start,"), "an event study plot with the infimum-based simultaneous confidence band in the pre-treatment period and the supremum-based simultaneous confidence band in the post-treatment period will be displayed below.")),
-                                  tags$li(p("The infimum-based (1-2*alpha)*100% simultaneous confidence band is for performing equivalence testing at significance level alpha (see Section 3.3 in ", a("Fang and Liebl (2025),", href="https://arxiv.org/abs/2512.06804"), " i.e. validating the honest reference band in the pre-anticipation period; and the supremum-based (1-alpha)*100% simultaneous confidence band is for performing relevance testing at significance level alpha (see Section 3.1 in ", a("Fang and Liebl (2025),", href="https://arxiv.org/abs/2512.06804"), " i.e. uniformly and honestly testing causal inference in the post-treatment period.")),
+                                  tags$li(p("The infimum-based (1-2*alpha)*100% simultaneous confidence band is for performing equivalence testing at significance level alpha (see Section 3.3 in ", a("Fang and Liebl (2026),", href="https://arxiv.org/abs/2512.06804"), " i.e. validating the honest reference band in the pre-anticipation period; and the supremum-based (1-alpha)*100% simultaneous confidence band is for performing relevance testing at significance level alpha (see Section 3.1 in ", a("Fang and Liebl (2026),", href="https://arxiv.org/abs/2512.06804"), " i.e. uniformly and honestly testing causal inference in the post-treatment period.")),
                                   #tags$li(p("With the honest reference band you define for honest causal inference, you can find the time spans over which the treatment effect is uniformly significant. You could fine-tune the control parameters in [Step 5] such that the reference band can be validated in the pre-anticipation period or the treatment effect in the post-treatment period is borderline significant over a certain time span.")),
                                   tags$li(p("The inference result around the reference time point (i.e. between two event times closest to the reference time) should be treated with caution.")),
                                   tabPanel("Event Study Plot", 
@@ -234,7 +234,7 @@ OwnData <- tabPanel(strong("Analyze Your Own Estimates"), fluid = TRUE, icon = i
                                                               tags$li(h6("If it is defined to be the first event time, there must be no violations of parallel trends assumption, because no data is available for computing pre-trend differences")) 
                                                               ), value = ""),
                         numericInput("owndata_ta.s1", label=p("Enter the two control parameters S_u and S_l for treatment anticipation (min=0, max=20, step=0.01)",
-                                                             tags$li(h6("See equation (36) in ", a("Fang and Liebl (2025)", href="https://arxiv.org/abs/2512.06804"), "for details")),
+                                                             tags$li(h6("See equation (36) in ", a("Fang and Liebl (2026)", href="https://arxiv.org/abs/2512.06804"), "for details")),
                                                              tags$li(h6("Leaving it blank means that the point-wise confidence interval at time point specified above is used to define the bounds for anticipation")),
                                                              tags$li(h6("If no anticipation is defined above, the values will be simply ignored"))),
                                      value = "", min=0, max=20, step=0.01),
@@ -249,7 +249,7 @@ OwnData <- tabPanel(strong("Analyze Your Own Estimates"), fluid = TRUE, icon = i
                         conditionalPanel(
                           condition = "input.owndata_diff_trend != '2'",
                           p("Enter the control prameters M_u and M_l for parallel trends violation (min=0, max=20, step=0.01)",
-                            tags$li(h6("See equation (37) in ", a("Fang and Liebl (2025)", href="https://arxiv.org/abs/2512.06804"), "for details"))),
+                            tags$li(h6("See equation (37) in ", a("Fang and Liebl (2026)", href="https://arxiv.org/abs/2512.06804"), "for details"))),
                           numericInput("owndata_control_par1", "", value = 0.5, min = 0, max=20, step=0.01),
                           numericInput("owndata_control_par2", "", value = 0.5, min = 0, max=20, step=0.01)
                         ),
@@ -291,7 +291,7 @@ OwnData <- tabPanel(strong("Analyze Your Own Estimates"), fluid = TRUE, icon = i
                           column(10,
                                  h4(textOutput("owndata_currentTime")),
                                  tags$li(p("Once you click", strong("Start,"), "an event study plot with the infimum-based simultaneous confidence band in the pre-treatment period and the supremum-based simultaneous confidence band in the post-treatment period will be displayed below.")),
-                                 tags$li(p("The infimum-based (1-2*alpha)*100% simultaneous confidence band is for performing equivalence testing at significance level alpha (see Section 3.3 in ", a("Fang and Liebl (2025),", href="https://arxiv.org/abs/2512.06804"), " i.e. validating the honest reference band in the pre-anticipation period; and the supremum-based (1-alpha)*100% simultaneous confidence band is for performing relevance testing at significance level alpha (see Section 3.1 in ", a("Fang and Liebl (2025),", href="https://arxiv.org/abs/2512.06804"), " i.e. uniformly and honestly testing causal inference in the post-treatment period.")),
+                                 tags$li(p("The infimum-based (1-2*alpha)*100% simultaneous confidence band is for performing equivalence testing at significance level alpha (see Section 3.3 in ", a("Fang and Liebl (2026),", href="https://arxiv.org/abs/2512.06804"), " i.e. validating the honest reference band in the pre-anticipation period; and the supremum-based (1-alpha)*100% simultaneous confidence band is for performing relevance testing at significance level alpha (see Section 3.1 in ", a("Fang and Liebl (2026),", href="https://arxiv.org/abs/2512.06804"), " i.e. uniformly and honestly testing causal inference in the post-treatment period.")),
                                  #tags$li(p("With the honest reference band you define for honest causal inference, you can find the time spans over which the treatment effect is uniformly significant. You could fine-tune the control parameters in [Step 6] such that the reference band can be validated in the pre-anticipation period or the treatment effect in the post-treatment period is borderline significant over a certain time span.")),
                                  tags$li(p("The inference result around the reference time point (i.e. between two event times closest to the reference time) should be treated with caution.")),
                                  tabPanel("Event Study Plot", 
@@ -391,7 +391,7 @@ More <- navbarMenu(strong("More"), icon = icon("list"),
                    tabPanel(strong("Resources"), fluid = TRUE,
                             p(h4("Related Researches")),
                             tags$ul(
-                              tags$li(p(a("Fang and Liebl (2025):", href="https://arxiv.org/abs/2512.06804"), "Making Event Study Plots Honest: A Functional Data Approach to Causal Inference.", em("Working Paper."))),
+                              tags$li(p(a("Fang and Liebl (2026):", href="https://arxiv.org/abs/2512.06804"), "Making Event Study Plots Honest: A Functional Data Approach to Causal Inference.", em("Working Paper."))),
                               tags$li(p(a("Liebl and Reimherr (2023):", href="https://academic.oup.com/jrsssb/article/85/3/842/7133768"), "Fast and fair simultaneous confidence bands for functional parameters.", em("Journal of the Royal Statistical Society Series B: Statistical Methodology"), "85 (3): 842–868.")),
                               tags$li(p(a("Rambachan and Roth (2023):", href="https://academic.oup.com/restud/article-abstract/90/5/2555/7039335"), "A More Credible Approach to Parallel Trends.", em("The Review of Economic Studies"), "90 (5): 2555–2591."))
                               ),

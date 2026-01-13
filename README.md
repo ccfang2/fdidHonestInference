@@ -6,7 +6,7 @@
 ![GitHub Repo stars](https://img.shields.io/github/stars/ccfang2/fdidHonestInference?style=social)
 ![Twitter Follow](https://img.shields.io/twitter/follow/ccfang819?logo=Twitter&style=social)
 
-This is a shiny app that facilitates the honest causal inference approach proposed in Fang and Liebl (2025)[^1] and is built on the R package: [fdid](https://github.com/ccfang2/fdid). Latest Update: 2025-12-15
+This is a shiny app that facilitates the honest causal inference approach proposed in Fang and Liebl (2026)[^1] and is built on the R package: [fdid](https://github.com/ccfang2/fdid). Latest Update: 2025-01-13
 
 ## About Honest DiD Inference
 
@@ -34,17 +34,17 @@ shiny::runGitHub("fdidHonestInference", "ccfang2")
 ### What does this app do for you
 1. Honest inference for some example papers and simulation data.
 2. Honest inference for your own data, if you already have estimated event-study coefficients and covariance matrix.
-3. DiD estimation using functional TWFE model as presented in Fang and Liebl (2025)[^1], if you haven't got estimated event-study coefficients and covariance matrix yet.
+3. DiD estimation using functional TWFE model as presented in Fang and Liebl (2026)[^1], if you haven't got estimated event-study coefficients and covariance matrix yet.
 
 ### Features
-1. No need to install or configurate anything before using this app. This is user-friendly to non-R users. But it is highly recommended to read Fang and Liebl (2025)[^1] beforehand, so you will know all the terms that appear on the app.
+1. No need to install or configurate anything before using this app. This is user-friendly to non-R users. But it is highly recommended to read Fang and Liebl (2026)[^1] beforehand, so you will know all the terms that appear on the app.
 2. Analysis results and plots are downloadable by a simple click of button. But, please be reminded that only the latest analysis results and plots are accessible, so please download them timely if needed.
 
 ### Instructions
 Please watch this Youtube [video](https://www.youtube.com/watch?v=tUGmDLJE9qA) for detailed instruction. This video is also embeded in this Shiny app. Please be aware that the layout of Shiny app shown in this video may be slightly different from the latest version of app.
 
 ## Reference
-[^1]: Fang, C. and Liebl, D. (2025). Making Event Study Plots Honest: A Functional Data Approach to Causal Inference. [arXiv:2512.06804](https://arxiv.org/abs/2512.06804).
+[^1]: Fang, C. and Liebl, D. (2026). Making Event Study Plots Honest: A Functional Data Approach to Causal Inference. [arXiv:2512.06804](https://arxiv.org/abs/2512.06804).
 
 ## Contact
 I hope you enjoy using this app. Any comments or questions are welcome at [ccfang[at]uni-bonn.de](mailto:ccfang@uni-bonn.de).
